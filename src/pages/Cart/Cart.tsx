@@ -15,6 +15,11 @@ const Cart: React.FC = () => {
       {cartItems.map((item) => (
         <CartItem cartItem={item} key={item.product.id} />
       ))}
+      <div className={cl.cartTotal}>
+        <p className={cl.cartTotalInner}>
+          {cartAmount} item{cartAmount > 1 && "s"}: $<strong>{cartCost}</strong>
+        </p>
+      </div>
     </div>
   );
 };
