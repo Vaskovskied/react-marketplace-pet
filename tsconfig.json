@@ -4,8 +4,9 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
     ],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

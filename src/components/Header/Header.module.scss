@@ -1,0 +1,29 @@
+.header {
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  height: 70px;
+  width: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 0 36px;
+
+  nav {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+
+  &Icon {
+    position: relative;
+    top: 4px;
+    margin: 0 2px;
+    height: 28px;
+  }
+}

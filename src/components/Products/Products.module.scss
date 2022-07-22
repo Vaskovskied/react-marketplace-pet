@@ -1,0 +1,17 @@
+.root {
+  width: 100%;
+}
+
+.mainGrid {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(276px, 1fr));
+}
+
+h2 {
+  margin-left: 0;
+  margin-bottom: 12px;
+}

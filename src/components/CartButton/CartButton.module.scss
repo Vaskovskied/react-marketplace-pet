@@ -1,0 +1,32 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 150px;
+  border-radius: 28px;
+  height: 56px;
+  padding: 6px;
+  border: 1px solid lightgray;
+}
+
+.cartInfo {
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: blue;
+}
+
+.icon {
+  color: #fff;
+  height: 24px;
+}

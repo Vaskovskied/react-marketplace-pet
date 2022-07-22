@@ -1,0 +1,70 @@
+.root {
+  height: 124px;
+  padding: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.image {
+  width: 10%;
+  object-fit: contain;
+  // margin-right: 36px;
+  margin-right: 12px;
+}
+
+.info {
+  width: calc(90% - 12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  width: 100%;
+  height: 34px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.amountPriceContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.amountContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.amount {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 6px;
+}
+
+.price {
+  font-size: 24px;
+}
+
+.icon {
+  height: 24px;
+}
+
+.signBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  border: 1px solid lightgray;
+  border-radius: 50%;
+}

@@ -1,0 +1,29 @@
+.buyBtn {
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: blue;
+  color: #fff;
+  border: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+
+  span {
+    text-align: left;
+    font-size: 18px;
+    height: 23px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &Icon {
+    margin-left: 8px;
+    height: 24px;
+  }
+}
