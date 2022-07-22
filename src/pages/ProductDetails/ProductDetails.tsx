@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BuyButton from "../../components/BuyButton/BuyButton";
 import { IProduct } from "../../models/models";
 import cl from "./ProductDetails.module.scss";
@@ -20,6 +20,7 @@ const initialState = {
 
 const ProductDetails: React.FC = () => {
   const [product, setProduct] = useState<IProduct>(initialState);
+  const navigate = useNavigate();
   const { productId } = useParams();
 
   const fetchProduct = useCallback(
@@ -27,10 +28,13 @@ const ProductDetails: React.FC = () => {
       const res = await axios.get(
         `https://fakestoreapi.com/products/${productId}`
       );
-      console.log(res);
-      setProduct(res.data);
+      if (res.data.id === undefined) {
+        navigate("/");
+      } else {
+        setProduct(res.data);
+      }
     },
-    [productId]
+    [productId, navigate]
   );
 
   useEffect(() => {

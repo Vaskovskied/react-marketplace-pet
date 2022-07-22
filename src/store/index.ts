@@ -11,11 +11,9 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import cartReducer from "./slices/cartSlice";
-import activeCategoryReducer from "./slices/activeCategorySlice";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-  // activeCategory: activeCategoryReducer,
 });
 
 const persistConfig = {

@@ -7,10 +7,10 @@ import cl from "./Catalog.module.scss";
 export const categoryContext = createContext<string | undefined>("");
 
 const Catalog: React.FC = () => {
-  const { categoryId } = useParams();
+  const { categoryName } = useParams();
   return (
     <div className={cl.root}>
-      <categoryContext.Provider value={categoryId}>
+      <categoryContext.Provider value={categoryName}>
         <Categories />
         <Products />
       </categoryContext.Provider>

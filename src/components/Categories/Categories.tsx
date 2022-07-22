@@ -6,13 +6,14 @@ import { GET_ALL_CATEGORIES } from "../../static/urls";
 import cl from "./Categories.module.scss";
 
 export const Categories: React.FC = () => {
-  const categoryId = useContext(categoryContext);
+  const categoryName = useContext(categoryContext);
   const [categories, setCategories] = useState<string[]>([]);
 
   async function fetchCategories() {
     const res = await axios.get(GET_ALL_CATEGORIES);
     setCategories(res.data);
   }
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -24,7 +25,7 @@ export const Categories: React.FC = () => {
         <Link to="/all">
           <li
             className={`${
-              (categoryId === "all" || categoryId === undefined) &&
+              (categoryName === "all" || categoryName === undefined) &&
               cl.categoryActive
             } ${cl.category}`}
           >
@@ -34,7 +35,7 @@ export const Categories: React.FC = () => {
         {categories.map((item) => (
           <Link to={`/${item}`} key={item}>
             <li
-              className={`${categoryId === item && cl.categoryActive} ${
+              className={`${categoryName === item && cl.categoryActive} ${
                 cl.category
               }`}
             >

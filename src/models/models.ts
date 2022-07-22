@@ -26,13 +26,3 @@ export interface IProduct {
     count: number;
   };
 }
-
-// export interface ICategory {
-//   id: number;
-//   name: string;
-//   image: string;
-// }
-
-export interface IActiveCategory {
-  value: string; // "all" for not assigned
-}
