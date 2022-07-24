@@ -4,20 +4,54 @@
   max-width: 1180px;
 }
 
+.cartItems {
+  width: 100%;
+  margin-bottom: 95px;
+}
+
 .cartTotal {
-  height: 70px;
   position: fixed;
   width: 100vw;
-  padding: 18px 0;
+  padding: 18px;
+  height: 95px;
   border-top: 1px solid lightgrey;
   background-color: #fff;
   bottom: 0;
   left: 0;
-  font-size: 24px;
 
   &Inner {
     margin: 0 auto;
-    // padding: 0 18px;
+    height: 100%;
     max-width: 1180px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
+}
+
+.deleteAllBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  padding: 6px 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #d80000;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cartTotalInfo {
+  font-size: 24px;
+}
+
+.trashIcon {
+  position: relative;
+  left: 2px;
+  bottom: 1.5px;
+  height: 24px;
 }

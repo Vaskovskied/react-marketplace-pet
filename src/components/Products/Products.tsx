@@ -11,20 +11,23 @@ import cl from "./Products.module.scss";
 export const Products: React.FC = () => {
   const categoryName = useContext(categoryContext);
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [error, setError] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const fetchProducts = useCallback(
     async function () {
-      const res =
-        categoryName === "all" || categoryName === undefined
-          ? await axios.get(GET_ALL_PRODUCTS)
-          : await axios.get(getAllProdcutsByCategory(categoryName));
-      if (res.data.length === 0) {
-        // better to catch error that this
-        navigate("/");
-      } else {
+      try {
+        const res =
+          categoryName === "all" || categoryName === undefined
+            ? await axios.get(GET_ALL_PRODUCTS)
+            : await axios.get(getAllProdcutsByCategory(categoryName));
+        console.log(res);
+        if (res.data.length === 0) {
+          throw new Error("Error 404: category is not found");
+        }
         setProducts(res.data);
+      } catch (err) {
+        console.error((err as Error).message);
+        navigate("/");
       }
     },
     [categoryName, navigate]

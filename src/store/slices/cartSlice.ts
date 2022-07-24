@@ -67,10 +67,32 @@ export const cartSlice = createSlice({
         state.allAmount -= 1;
       }
     },
+
+    deleteProduct(state, action: PayloadAction<ICartItem>) {
+      const targetIndex = state.items.findIndex(
+        (item) => item.product.id === action.payload.product.id
+      );
+      state.allCost = Big(state.allCost)
+        .minus(action.payload.allCost)
+        .toNumber();
+      state.allAmount -= action.payload.amount;
+      state.items.splice(targetIndex, 1);
+    },
+
+    emtpyCart(state) {
+      state.items = [];
+      state.allAmount = 0;
+      state.allCost = 0;
+    },
   },
 });
 
-export const { addCartItem, incrementCartItem, decrementCartItem } =
-  cartSlice.actions;
+export const {
+  addCartItem,
+  incrementCartItem,
+  decrementCartItem,
+  deleteProduct,
+  emtpyCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

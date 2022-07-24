@@ -25,13 +25,17 @@ const ProductDetails: React.FC = () => {
 
   const fetchProduct = useCallback(
     async function () {
-      const res = await axios.get(
-        `https://fakestoreapi.com/products/${productId}`
-      );
-      if (res.data.id === undefined) {
-        navigate("/");
-      } else {
+      try {
+        const res = await axios.get(
+          `https://fakestoreapi.com/products/${productId}`
+        );
+        if (res.data === "") {
+          throw new Error("Erorr 404: product is not found");
+        }
         setProduct(res.data);
+      } catch (err) {
+        console.error((err as Error).message);
+        navigate("/");
       }
     },
     [productId, navigate]
