@@ -1,12 +1,45 @@
+import { getProductById } from "./../../utils/urlFunctions";
+import { RootState } from "./../index";
 import { ICart, ICartItem, IProduct } from "./../../models/models";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Big from "big.js";
+import axios from "axios";
 
 const initialState: ICart = {
   items: [],
   allAmount: 0,
   allCost: 0,
+  // isLoading : false
+  // error : error<null | string>
+  // maybe lastUpdateDate: Date | null
 };
+
+export const updateCart = createAsyncThunk<
+  ICartItem[],
+  undefined,
+  {
+    state: RootState;
+    rejectValue: string;
+  }
+>("cart/updateCart", async function (_, { getState, rejectWithValue }) {
+  const { items: allCartItems } = getState().cart;
+  const updated: ICartItem[] = [];
+  for (let i = 0; i < allCartItems.length; i++) {
+    const item = allCartItems[i];
+    const { data: resData } = await axios.get(getProductById(item.product.id));
+    if (resData === "") {
+      return rejectWithValue("Error 404: one of the products not found");
+    }
+    updated.push({
+      product: resData as IProduct,
+      amount: item.amount,
+      allCost: Big(item.amount)
+        .mul((resData as IProduct).price)
+        .toNumber(),
+    });
+  }
+  return updated;
+});
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -84,6 +117,17 @@ export const cartSlice = createSlice({
       state.allAmount = 0;
       state.allCost = 0;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(updateCart.fulfilled, (state, { payload }) => {
+      state.items = payload;
+      state.allCost = payload.reduce((prev, curr) => {
+        return Big(prev).plus(curr.allCost).toNumber();
+      }, 0);
+    });
+    builder.addCase(updateCart.rejected, (state, { payload }) => {
+      console.error(payload);
+    });
   },
 });
 

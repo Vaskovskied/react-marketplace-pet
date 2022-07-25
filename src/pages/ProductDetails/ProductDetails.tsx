@@ -30,7 +30,7 @@ const ProductDetails: React.FC = () => {
           `https://fakestoreapi.com/products/${productId}`
         );
         if (res.data === "") {
-          throw new Error("Erorr 404: product is not found");
+          throw new Error("Erorr 404: product not found");
         }
         setProduct(res.data);
       } catch (err) {

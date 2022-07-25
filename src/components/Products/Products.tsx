@@ -20,9 +20,8 @@ export const Products: React.FC = () => {
           categoryName === "all" || categoryName === undefined
             ? await axios.get(GET_ALL_PRODUCTS)
             : await axios.get(getAllProdcutsByCategory(categoryName));
-        console.log(res);
         if (res.data.length === 0) {
-          throw new Error("Error 404: category is not found");
+          throw new Error("Error 404: category not found");
         }
         setProducts(res.data);
       } catch (err) {

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CartItem from "../../components/CartItem/CartItem";
 import TrashSVG from "../../components/icons/TrashSVG";
 import useAppDispatch from "../../hooks/redux/useAppDispatch";
 import useAppSelector from "../../hooks/redux/useAppSelector";
-import { emtpyCart } from "../../store/slices/cartSlice";
+import { emtpyCart, updateCart } from "../../store/slices/cartSlice";
 import cl from "./Cart.module.scss";
 
 const Cart: React.FC = () => {
@@ -13,6 +13,10 @@ const Cart: React.FC = () => {
     allAmount: cartAmount,
     allCost: cartCost,
   } = useAppSelector((state) => state.cart);
+
+  useEffect(() => {
+    dispatch(updateCart());
+  }, []);
   return (
     <div className={cl.root}>
       <h2>Cart</h2>
