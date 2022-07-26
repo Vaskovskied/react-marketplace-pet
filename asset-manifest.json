@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-marketplace-pet/static/css/main.53fe0f27.css",
-    "main.js": "/react-marketplace-pet/static/js/main.d19f7220.js",
+    "main.js": "/react-marketplace-pet/static/js/main.feb75731.js",
     "index.html": "/react-marketplace-pet/index.html",
     "main.53fe0f27.css.map": "/react-marketplace-pet/static/css/main.53fe0f27.css.map",
-    "main.d19f7220.js.map": "/react-marketplace-pet/static/js/main.d19f7220.js.map"
+    "main.feb75731.js.map": "/react-marketplace-pet/static/js/main.feb75731.js.map"
   },
   "entrypoints": [
     "static/css/main.53fe0f27.css",
-    "static/js/main.d19f7220.js"
+    "static/js/main.feb75731.js"
   ]
 }
