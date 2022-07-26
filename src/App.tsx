@@ -13,7 +13,7 @@ export const App: React.FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
+        <BrowserRouter basename="/react-marketplace-pet">
           <div className="App">
             <Header />
             <Routes>
