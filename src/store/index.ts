@@ -11,9 +11,11 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import cartReducer from "./slices/cartSlice";
+import sortReducer from "./slices/sortSlice";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
+  sort: sortReducer,
 });
 
 const persistConfig = {

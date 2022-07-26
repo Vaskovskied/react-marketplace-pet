@@ -12,6 +12,10 @@
   border-radius: 8px;
   cursor: pointer;
 
+  &:hover {
+    transform: scale(1.025);
+  }
+
   span {
     text-align: left;
     font-size: 18px;

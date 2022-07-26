@@ -9,9 +9,8 @@ const initialState: ICart = {
   items: [],
   allAmount: 0,
   allCost: 0,
-  // isLoading : false
-  // error : error<null | string>
-  // maybe lastUpdateDate: Date | null
+  isLoading: false,
+  error: null,
 };
 
 export const updateCart = createAsyncThunk<
@@ -22,10 +21,10 @@ export const updateCart = createAsyncThunk<
     rejectValue: string;
   }
 >("cart/updateCart", async function (_, { getState, rejectWithValue }) {
-  const { items: allCartItems } = getState().cart;
+  const state = getState().cart;
   const updated: ICartItem[] = [];
-  for (let i = 0; i < allCartItems.length; i++) {
-    const item = allCartItems[i];
+  for (let i = 0; i < state.items.length; i++) {
+    const item = state.items[i];
     const { data: resData } = await axios.get(getProductById(item.product.id));
     if (resData === "") {
       return rejectWithValue("Error 404: one of the products not found");
@@ -119,14 +118,23 @@ export const cartSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(updateCart.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
     builder.addCase(updateCart.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = null;
       state.items = payload;
       state.allCost = payload.reduce((prev, curr) => {
         return Big(prev).plus(curr.allCost).toNumber();
       }, 0);
     });
     builder.addCase(updateCart.rejected, (state, { payload }) => {
-      console.error(payload);
+      state.isLoading = false;
+      const errorMessage = payload === undefined ? "Unexpected error" : payload;
+      state.error = errorMessage;
+      console.error(errorMessage);
     });
   },
 });

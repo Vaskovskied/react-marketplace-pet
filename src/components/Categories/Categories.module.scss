@@ -32,6 +32,10 @@
   user-select: none;
   white-space: nowrap;
 
+  &:hover {
+    transform: translate3d(0, -2px, 0);
+  }
+
   &Active {
     background-color: blue;
     color: #fff;

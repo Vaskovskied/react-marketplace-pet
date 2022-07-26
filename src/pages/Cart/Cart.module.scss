@@ -43,6 +43,10 @@
   border-radius: 8px;
   color: #fff;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.025);
+  }
 }
 
 .cartTotalInfo {

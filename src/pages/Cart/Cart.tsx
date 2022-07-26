@@ -12,16 +12,24 @@ const Cart: React.FC = () => {
     items: cartItems,
     allAmount: cartAmount,
     allCost: cartCost,
+    isLoading,
+    error,
   } = useAppSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(updateCart());
-  }, []);
+  }, [dispatch]);
+
   return (
     <div className={cl.root}>
       <h2>Cart</h2>
-      {cartItems.length === 0 ? (
-        <h3>Cart is empty</h3>
+
+      {isLoading ? (
+        <h3 style={{ textAlign: "center" }}>Loading...</h3>
+      ) : error !== null ? (
+        <h3 style={{ color: "#8b0000", textAlign: "center" }}>{error}</h3>
+      ) : !isLoading && cartItems.length === 0 ? (
+        <h3 style={{ textAlign: "center" }}>Cart is empty</h3>
       ) : (
         <div className={cl.cartItems}>
           {cartItems.map((item) => (

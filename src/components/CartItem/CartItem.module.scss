@@ -13,6 +13,11 @@
   width: 10%;
   object-fit: contain;
   margin-right: 12px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .info {
@@ -70,11 +75,19 @@
   width: 40px;
   border: 1px solid lightgray;
   border-radius: 50%;
+
+  &:hover {
+    transform: scale(1.025);
+  }
 }
 
 .deleteBtn {
   margin-left: auto;
   color: #d80000;
+
+  &:hover {
+    transform: scale(1.025);
+  }
 }
 
 @media screen and (max-width: 900px) {
