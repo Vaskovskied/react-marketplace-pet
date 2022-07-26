@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import Header from "./components/Header/Header";
 import Cart from "./pages/Cart/Cart";
@@ -13,7 +13,8 @@ export const App: React.FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="/react-marketplace-pet">
+        <HashRouter>
+          {/* <BrowserRouter basename="/react-marketplace-pet"> */}
           <div className="App">
             <Header />
             <Routes>
@@ -23,7 +24,7 @@ export const App: React.FC = () => {
               <Route path="/cart" element={<Cart />} />
             </Routes>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </PersistGate>
     </Provider>
   );
