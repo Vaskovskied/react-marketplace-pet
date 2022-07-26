@@ -35,7 +35,6 @@ export const Categories: React.FC = () => {
 
   return (
     <div className={cl.mainContainer}>
-      <h2>Categories</h2>
       {isLoading ? (
         <h3 style={{ textAlign: "center" }}>Loading...</h3>
       ) : error ? (

@@ -3,3 +3,15 @@
   margin: 90px auto 0px;
   max-width: 1180px;
 }
+
+.categoriesSortWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+h2 {
+  margin-left: 0;
+  margin-bottom: 12px;
+}

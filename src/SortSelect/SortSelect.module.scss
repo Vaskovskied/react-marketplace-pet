@@ -1,5 +1,6 @@
 .root {
   position: relative;
+  max-width: fit-content;
 }
 
 .sortWrapper {
@@ -7,6 +8,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  width: fit-content;
 }
 
 .label {
@@ -24,7 +26,7 @@
   border-radius: 8px;
   font-weight: 500;
   height: 56px;
-  max-width: 160px;
+  width: 144px;
   font-size: 20px;
   text-transform: lowercase;
   cursor: pointer;
@@ -34,7 +36,7 @@
   position: absolute;
   background-color: #fff;
   z-index: 1;
-  max-width: 160px;
+  width: 144px;
   top: 68px;
   left: 56px;
   border: 1px solid lightgray;

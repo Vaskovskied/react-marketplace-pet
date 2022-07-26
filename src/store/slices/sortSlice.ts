@@ -3,11 +3,10 @@ import { ISortState, TSortType } from "../../models/models";
 
 const initialState: ISortState = {
   sortTypes: [
-    { id: 0, title: "by default", header: "" },
-    { id: 1, title: "ascending", header: "?sort=asc" },
-    { id: 2, title: "descending", header: "?sort=desc" },
+    { id: 0, title: "ascending", header: "?sort=asc" },
+    { id: 1, title: "descending", header: "?sort=desc" },
   ],
-  selectedSort: { id: 0, title: "by default", header: "" },
+  selectedSort: { id: 0, title: "ascending", header: "?sort=asc" },
 };
 
 export const sortSlice = createSlice({

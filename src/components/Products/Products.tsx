@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useCallback, useContext } from "react";
+import useAppSelector from "../../hooks/redux/useAppSelector";
 import { IProduct } from "../../models/models";
 import { categoryContext } from "../../pages/Catalog/Catalog";
 import { GET_ALL_PRODUCTS } from "../../static/urls";
@@ -11,7 +12,8 @@ export const Products: React.FC = () => {
   const categoryName = useContext(categoryContext),
     [products, setProducts] = useState<IProduct[]>([]),
     [isLoading, setIsLoading] = useState<boolean>(false),
-    [error, setError] = useState<string | null>(null);
+    [error, setError] = useState<string | null>(null),
+    { selectedSort } = useAppSelector((state) => state.sort);
 
   const fetchProducts = useCallback(
     async function () {
@@ -20,8 +22,10 @@ export const Products: React.FC = () => {
         setIsLoading(true);
         const res =
           categoryName === "all" || categoryName === undefined
-            ? await axios.get(GET_ALL_PRODUCTS)
-            : await axios.get(getAllProdcutsByCategory(categoryName));
+            ? await axios.get(GET_ALL_PRODUCTS + selectedSort.header)
+            : await axios.get(
+                getAllProdcutsByCategory(categoryName + selectedSort.header)
+              );
         if (res.data.length === 0) {
           throw new Error("Error 404: category not found");
         }
@@ -34,7 +38,7 @@ export const Products: React.FC = () => {
         setIsLoading(false);
       }
     },
-    [categoryName]
+    [categoryName, selectedSort]
   );
 
   useEffect(() => {
