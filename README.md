@@ -22,4 +22,4 @@ Firstly, you can choose category in the Catalog page and view it in the link. Th
 You can click on a product and visit product details page or add it to cart directly from catalog page.  
 
 When you choose what you want to buy, you can visit cart page. And you will see "loading..." message or (if you're lucky) error message. This is caused by special Redux async action `updateCart()` I created to handle situations where backend data can be change, but client will not see it.  
-On this page you can increment or decrement product quantity or delete products. Also you can empty your cart. All of these actions are stored in Redux `src/store/cartSlice`. I used [Redux Persist](https://github.com/rt2zz/redux-persist) to store it in the local storage.
+On this page you can increment or decrement product quantity or delete products. Also you can empty your cart. All of these actions and cart data are stored in Redux `src/store/cartSlice`. I used [Redux Persist](https://github.com/rt2zz/redux-persist) to store it in the local storage.
