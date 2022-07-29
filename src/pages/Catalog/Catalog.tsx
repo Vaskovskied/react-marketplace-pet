@@ -11,12 +11,13 @@ const Catalog: React.FC = () => {
   const { categoryName } = useParams();
   return (
     <div className={cl.root}>
-      <h2>Categories</h2>
+      <h2 className={cl.heading}>Categories</h2>
       <categoryContext.Provider value={categoryName}>
         <div className={cl.categoriesSortWrapper}>
           <Categories />
           <SortSelect />
         </div>
+        <h2 className={cl.heading}>Products</h2>
         <Products />
       </categoryContext.Provider>
     </div>

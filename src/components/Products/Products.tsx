@@ -47,7 +47,6 @@ export const Products: React.FC = () => {
 
   return (
     <div className={cl.root}>
-      <h2>Products</h2>
       {isLoading ? (
         <h3 style={{ textAlign: "center" }}>Loading...</h3>
       ) : error ? (

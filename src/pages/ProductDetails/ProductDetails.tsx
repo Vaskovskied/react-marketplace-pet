@@ -50,7 +50,6 @@ const ProductDetails: React.FC = () => {
       <img src={product.image} alt={product.title} className={cl.image}></img>
       <div className={cl.info}>
         <h2 className={cl.title}>{product.title}</h2>
-        {/* <p className={cl.rating}>{product.rating.rate}</p> */}
         <h3 className={cl.price}>
           $<strong>{product.price}</strong>
         </h3>

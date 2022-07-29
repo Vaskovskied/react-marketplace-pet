@@ -10,7 +10,6 @@ const Header: React.FC = () => {
       <nav>
         <Link to={"/"}>
           <div className={cl.logo}>
-            {/* <span>REACT</span> */}
             <ShoppingBagSVG styles={cl.logoIcon} />
             <span>SHOP</span>
           </div>
