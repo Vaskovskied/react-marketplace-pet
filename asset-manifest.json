@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-marketplace-pet/static/css/main.53fe0f27.css",
-    "main.js": "/react-marketplace-pet/static/js/main.feb75731.js",
+    "main.css": "/react-marketplace-pet/static/css/main.27c881fa.css",
+    "main.js": "/react-marketplace-pet/static/js/main.2e5a5f03.js",
     "index.html": "/react-marketplace-pet/index.html",
-    "main.53fe0f27.css.map": "/react-marketplace-pet/static/css/main.53fe0f27.css.map",
-    "main.feb75731.js.map": "/react-marketplace-pet/static/js/main.feb75731.js.map"
+    "main.27c881fa.css.map": "/react-marketplace-pet/static/css/main.27c881fa.css.map",
+    "main.2e5a5f03.js.map": "/react-marketplace-pet/static/js/main.2e5a5f03.js.map"
   },
   "entrypoints": [
-    "static/css/main.53fe0f27.css",
-    "static/js/main.feb75731.js"
+    "static/css/main.27c881fa.css",
+    "static/js/main.2e5a5f03.js"
   ]
 }
