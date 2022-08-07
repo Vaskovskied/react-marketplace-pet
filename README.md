@@ -1,6 +1,6 @@
 # Simple e-commerce pet-project 
 SPA made with React, Redux, Typescript and SCSS.  
-> *You can [use this application by the link](https://vaskovskied.github.io/react-marketplace-pet/)*
+### [VIEW AND TEST IT HERE](https://vaskovskied.github.io/react-marketplace-pet/)
 ### Stack:
 * React.js
 * Redux toolkit
