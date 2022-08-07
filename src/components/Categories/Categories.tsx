@@ -1,25 +1,33 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import useAppDispatch from "../../hooks/redux/useAppDispatch";
-import useAppSelector from "../../hooks/redux/useAppSelector";
-// import { ICategory } from "../../models/models";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { categoryContext } from "../../pages/Catalog/Catalog";
 import { GET_ALL_CATEGORIES } from "../../static/urls";
-import { setActiveCategory } from "../../store/slices/activeCategorySlice";
 import cl from "./Categories.module.scss";
 
 export const Categories: React.FC = () => {
-  const [categories, setCategories] = useState<string[]>([]);
-  const activeCategory = useAppSelector((state) => state.activeCategory.value);
-  const dispatch = useAppDispatch();
+  const categoryName = useContext(categoryContext),
+    [categories, setCategories] = useState<string[]>([]),
+    [isLoading, setIsLoading] = useState<boolean>(false),
+    [error, setError] = useState<string | null>(null);
 
   async function fetchCategories() {
-    const res = await axios.get(GET_ALL_CATEGORIES);
-    setCategories(res.data);
+    try {
+      setIsLoading(true);
+      setError(null);
+      const res = await axios.get(GET_ALL_CATEGORIES);
+      if (res.data === "") {
+        throw new Error("Error 404: categories not found");
+      }
+      setIsLoading(false);
+      setCategories(res.data);
+    } catch (err) {
+      const errMessage = (err as Error).message;
+      setIsLoading(false);
+      setError(errMessage);
+      console.error(errMessage);
+    }
   }
-
-  const onClickSetCategory = (category: string) => {
-    dispatch(setActiveCategory(category));
-  };
 
   useEffect(() => {
     fetchCategories();
@@ -27,28 +35,35 @@ export const Categories: React.FC = () => {
 
   return (
     <div className={cl.mainContainer}>
-      <h2>Categories</h2>
-      <ul>
-        <li
-          className={`${activeCategory === "all" && cl.categoryActive} ${
-            cl.category
-          }`}
-          onClick={() => onClickSetCategory("all")}
-        >
-          show all
-        </li>
-        {categories.map((item) => (
-          <li
-            className={`${activeCategory === item && cl.categoryActive} ${
-              cl.category
-            }`}
-            onClick={() => onClickSetCategory(item)}
-            key={item}
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <h3 style={{ textAlign: "center" }}>Loading...</h3>
+      ) : error ? (
+        <h3 style={{ color: "#8b0000", textAlign: "center" }}>{error}</h3>
+      ) : (
+        <ul>
+          <Link to="/all">
+            <li
+              className={`${
+                (categoryName === "all" || categoryName === undefined) &&
+                cl.categoryActive
+              } ${cl.category}`}
+            >
+              show all
+            </li>
+          </Link>
+          {categories.map((item) => (
+            <Link to={`/${item}`} key={item}>
+              <li
+                className={`${categoryName === item ? cl.categoryActive : ""} ${
+                  cl.category
+                }`}
+              >
+                {item}
+              </li>
+            </Link>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

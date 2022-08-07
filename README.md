@@ -1,46 +1,25 @@
-# Getting Started with Create React App
+# Simple e-commerce pet-project 
+SPA made with React, Redux, Typescript and SCSS.  
+### [VIEW AND TEST IT HERE](https://vaskovskied.github.io/react-marketplace-pet/)
+### Stack:
+* React.js
+* Redux toolkit
+* react-router-dom
+* TypeScript
+* SASS
+* axios
+* Redux Persist (to store some redux store data in the local storage)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I used [fake store (RESTful) api](https://github.com/keikaavousi/fake-store-api) to get products for my project. Also I used [Big.js](https://github.com/MikeMcl/big.js) to handle counting problems.  
 
-## Available Scripts
+### There's three pages: 
+1. Catalog page (homepage "/", "/:categoryName")
+2. Product details page ("product/:productId")
+3. Cart page ("product/cart")  
 
-In the project directory, you can run:
+Firstly, you can choose category in the Catalog page and view it in the link. That give you possibility to share the link to the certain category page. Also you can choose sort type. Unfortunetely, [API I used](https://github.com/keikaavousi/fake-store-api) allows me to use only to sort types: ascending and descending. So you can choose one of them. Sort logic is stored in Redux `src/store/sortSlice`.  
 
-### `yarn start`
+You can click on a product and visit product details page or add it to cart directly from catalog page.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+When you choose what you want to buy, you can visit cart page. And you will see "loading..." message or (if you're lucky) error message. This is caused by special Redux async action `updateCart()` I created to handle situations where backend data can be change, but client will not see it.  
+On this page you can increment or decrement product quantity or delete products. Also you can empty your cart. All of these actions and cart data are stored in Redux `src/store/cartSlice`. I used [Redux Persist](https://github.com/rt2zz/redux-persist) to store it in the local storage.

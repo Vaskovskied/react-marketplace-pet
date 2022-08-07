@@ -1,18 +1,13 @@
 .mainContainer {
-  width: 100%;
+  width: calc(100% - 218px);
   ul {
     padding: 12px 0;
-    margin-bottom: 12px;
     width: 100%;
     list-style-type: none;
     display: flex;
     flex-direction: row;
     align-items: center;
     overflow-x: auto;
-
-    // &:last-child {
-    //   margin-right: 0;
-    // }
   }
 
   h2 {
@@ -39,5 +34,11 @@
   &Active {
     background-color: blue;
     color: #fff;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .mainContainer {
+    width: 100%;
   }
 }

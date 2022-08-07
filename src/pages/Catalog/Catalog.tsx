@@ -1,13 +1,25 @@
-import React from "react";
+import React, { createContext } from "react";
+import { useParams } from "react-router-dom";
 import { Categories } from "../../components/Categories/Categories";
 import { Products } from "../../components/Products/Products";
+import SortSelect from "../../SortSelect/SortSelect";
 import cl from "./Catalog.module.scss";
 
+export const categoryContext = createContext<string | undefined>("");
+
 const Catalog: React.FC = () => {
+  const { categoryName } = useParams();
   return (
     <div className={cl.root}>
-      <Categories />
-      <Products />
+      <h2 className={cl.heading}>Categories</h2>
+      <categoryContext.Provider value={categoryName}>
+        <div className={cl.categoriesSortWrapper}>
+          <Categories />
+          <SortSelect />
+        </div>
+        <h2 className={cl.heading}>Products</h2>
+        <Products />
+      </categoryContext.Provider>
     </div>
   );
 };

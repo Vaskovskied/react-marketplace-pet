@@ -1,5 +1,6 @@
 .header {
   position: fixed;
+  z-index: 5;
   background-color: #fff;
   top: 0;
   height: 70px;
@@ -25,5 +26,11 @@
     top: 4px;
     margin: 0 2px;
     height: 28px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .header {
+    padding: 0 18px;
   }
 }

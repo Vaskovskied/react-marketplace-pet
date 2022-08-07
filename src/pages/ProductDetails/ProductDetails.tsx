@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BuyButton from "../../components/BuyButton/BuyButton";
 import { IProduct } from "../../models/models";
 import cl from "./ProductDetails.module.scss";
@@ -20,17 +20,25 @@ const initialState = {
 
 const ProductDetails: React.FC = () => {
   const [product, setProduct] = useState<IProduct>(initialState);
+  const navigate = useNavigate();
   const { productId } = useParams();
 
   const fetchProduct = useCallback(
     async function () {
-      const res = await axios.get(
-        `https://fakestoreapi.com/products/${productId}`
-      );
-      console.log(res);
-      setProduct(res.data);
+      try {
+        const res = await axios.get(
+          `https://fakestoreapi.com/products/${productId}`
+        );
+        if (res.data === "") {
+          throw new Error("Erorr 404: product not found");
+        }
+        setProduct(res.data);
+      } catch (err) {
+        console.error((err as Error).message);
+        navigate("/");
+      }
     },
-    [productId]
+    [productId, navigate]
   );
 
   useEffect(() => {
@@ -42,7 +50,6 @@ const ProductDetails: React.FC = () => {
       <img src={product.image} alt={product.title} className={cl.image}></img>
       <div className={cl.info}>
         <h2 className={cl.title}>{product.title}</h2>
-        {/* <p className={cl.rating}>{product.rating.rate}</p> */}
         <h3 className={cl.price}>
           $<strong>{product.price}</strong>
         </h3>

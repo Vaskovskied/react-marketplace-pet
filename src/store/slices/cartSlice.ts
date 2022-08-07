@@ -1,12 +1,44 @@
+import { getProductById } from "./../../utils/urlFunctions";
+import { RootState } from "./../index";
 import { ICart, ICartItem, IProduct } from "./../../models/models";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Big from "big.js";
+import axios from "axios";
 
 const initialState: ICart = {
   items: [],
   allAmount: 0,
   allCost: 0,
+  isLoading: false,
+  error: null,
 };
+
+export const updateCart = createAsyncThunk<
+  ICartItem[],
+  undefined,
+  {
+    state: RootState;
+    rejectValue: string;
+  }
+>("cart/updateCart", async function (_, { getState, rejectWithValue }) {
+  const state = getState().cart;
+  const updated: ICartItem[] = [];
+  for (let i = 0; i < state.items.length; i++) {
+    const item = state.items[i];
+    const { data: resData } = await axios.get(getProductById(item.product.id));
+    if (resData === "") {
+      return rejectWithValue("Error 404: one of the products not found");
+    }
+    updated.push({
+      product: resData as IProduct,
+      amount: item.amount,
+      allCost: Big(item.amount)
+        .mul((resData as IProduct).price)
+        .toNumber(),
+    });
+  }
+  return updated;
+});
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -67,10 +99,52 @@ export const cartSlice = createSlice({
         state.allAmount -= 1;
       }
     },
+
+    deleteProduct(state, action: PayloadAction<ICartItem>) {
+      const targetIndex = state.items.findIndex(
+        (item) => item.product.id === action.payload.product.id
+      );
+      state.allCost = Big(state.allCost)
+        .minus(action.payload.allCost)
+        .toNumber();
+      state.allAmount -= action.payload.amount;
+      state.items.splice(targetIndex, 1);
+    },
+
+    emtpyCart(state) {
+      state.items = [];
+      state.allAmount = 0;
+      state.allCost = 0;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(updateCart.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(updateCart.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = null;
+      state.items = payload;
+      state.allCost = payload.reduce((prev, curr) => {
+        return Big(prev).plus(curr.allCost).toNumber();
+      }, 0);
+    });
+    builder.addCase(updateCart.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      const errorMessage = payload === undefined ? "Unexpected error" : payload;
+      state.error = errorMessage;
+      console.error(errorMessage);
+    });
   },
 });
 
-export const { addCartItem, incrementCartItem, decrementCartItem } =
-  cartSlice.actions;
+export const {
+  addCartItem,
+  incrementCartItem,
+  decrementCartItem,
+  deleteProduct,
+  emtpyCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
